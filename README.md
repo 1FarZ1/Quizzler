@@ -1,7 +1,7 @@
 
 # Quizzler
 
-### An app That Help you learn and grow with different Quizzes in a lot of fields
+### - An app That Help you learn and grow with different Quizzes in a lot of fields
 
 
 
@@ -29,7 +29,7 @@
 
 ## Contributing
 
-Contributions are always welcome!
+- Contributions are always welcome!
 
 
 
@@ -45,10 +45,10 @@ Contributions are always welcome!
 
 ## Installation
 
- git clone https://github.com/1FarZ1/quizzler.git
- cd quizzler
- flutter packages get
- flutter run
+ - git clone https://github.com/1FarZ1/quizzler.git
+ - cd quizzler
+ - flutter packages get
+ - flutter run
     
     
     
@@ -57,7 +57,7 @@ Contributions are always welcome!
     
 ## Feedback
 
-If you have any feedback, please reach out to us at f_bekkouche@estin.dz
+- If you have any feedback, please reach out to us at f_bekkouche@estin.dz
 
 
 
@@ -70,13 +70,13 @@ If you have any feedback, please reach out to us at f_bekkouche@estin.dz
 
 ## FAQ
 
-#### Why install Quizzler
+## Why install Quizzler
 
-Quizzler is simple,LightWeight app that give the Users a basic questions on differenet fields and 
+- Quizzler is simple,LightWeight app that give the Users a basic questions on differenet fields and 
 reward them with points and get more Prizes according to their points
 
-#### Is Quizzler for Everybody ?
- Quizzler cover the  majority of people with low or high level, the more Questions You get the more Diffucult it Becomes
+## Is Quizzler for Everybody ?
+ - Quizzler cover the  majority of people with low or high level, the more Questions You get the more Diffucult it Becomes
  
  
  
@@ -84,17 +84,17 @@ reward them with points and get more Prizes according to their points
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+- [MIT](https://choosealicense.com/licenses/mit/)
 
 
 ## Support
 
-For support, email f_bekkouche@estin.dz
+- For support, email f_bekkouche@estin.dz
 
 
 ## Badges
 
-Add badges from somewhere like: [shields.io](https://shields.io/)
+- Add badges from somewhere like: [shields.io](https://shields.io/)
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
