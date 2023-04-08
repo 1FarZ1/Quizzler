@@ -2,14 +2,10 @@ import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:quizzler/Screens/Page.dart';
-import 'package:quizzler/Screens/profile.dart';
+import './Page.dart';
+import './profile.dart';
 
-const Color KPRIMAY = Color(0xff55747E);
-const Color KSECONDARY = Color(0XFFE5FEEC);
-const Color KTHIRD = Color(0xff28E68E);
-const Color KFOUR = Color(0xffF1FFEF);
-const Color KFIVE = Color(0xffDDFEE4);
+
 int Correct_answr = 0;
 
 class Home extends StatefulWidget {

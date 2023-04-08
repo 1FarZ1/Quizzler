@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:quizzler/Screens/Page.dart';
-import 'package:quizzler/Screens/home.dart';
-import 'package:quizzler/Screens/profile.dart';
-import 'package:quizzler/Screens/splash.dart';
+import './Screens/Page.dart';
+import './Screens/home.dart';
+import './Screens/profile.dart';
+import './Screens/splash.dart';
 import 'networking/Loading.dart';
 
 void main() {
