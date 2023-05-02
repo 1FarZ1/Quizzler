@@ -33,11 +33,6 @@ class _QuizzPageState extends State<QuizzPage> {
   int selected_index = 5;
   bool saying = true;
   int? my_choice;
-  // late List new1;
-  // Future<List<Question>> Res() async {
-  //  List x = await QuizzBrain.GetQuestion();
-  //   return x as Future<List<Question>>;
-  // }
   void ManageData(Map data) {
     if (saying) {
       for (int i = 0; i < data["results"].length; i++) {
@@ -65,10 +60,7 @@ class _QuizzPageState extends State<QuizzPage> {
 
   @override
   void initState() {
-    // Display = Res();
     super.initState();
-
-    // print(Display);
   }
 
   @override
@@ -86,11 +78,7 @@ class _QuizzPageState extends State<QuizzPage> {
         padding: const EdgeInsets.fromLTRB(32, 55.0, 32, 10),
         child: SingleChildScrollView(
           child: FutureBuilder(
-            future: http.get(Uri.parse(
-                "${TRIVIA}amount=8&category=${get_cat()}&difficulty=medium&type=multiple")),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData) {
-                ManageData(jsonDecode(snapshot.data.body));
                 return Column(children: [
                   Container(
                     padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
@@ -148,7 +136,6 @@ class _QuizzPageState extends State<QuizzPage> {
                       itemBuilder: (context, i) {
                         if (i >= 0 && i < 4) {
                           try {
-                            // print(Questions[index].suggestions);
                             return ChooseCard(Questions[index].suggestions[i],
                                 i, selected_index, () {
                               setState(() {
@@ -160,7 +147,6 @@ class _QuizzPageState extends State<QuizzPage> {
                               });
                             });
                           } catch (e) {
-                            print(e);
                             return const CircularProgressIndicator();
                           }
                         } else if (i == 4) {
@@ -232,10 +218,7 @@ class _QuizzPageState extends State<QuizzPage> {
                           return const Text("no elememt");
                         }
                       }),
-                ]);
-              } else {
-                return const CircularProgressIndicator();
-              }
+                ]);        
             },
           ),
         ),

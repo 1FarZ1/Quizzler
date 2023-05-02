@@ -2,8 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:quizzler/models/quizz.dart';
 
-const TRIVIA =
-    "https://opentdb.com/api.php?";
+
 const Map TRIVIA_DATA={
   "Mathematics":[19,0,0],
   "History":[23,0,0],
@@ -22,7 +21,6 @@ Map TRIVIA_Slider={
 
 
 
-// its better to use future builder in small data then other files but i tried and i will back to  this file to see whats wrong with my asycronss
 abstract class QuizzBrain {
   static List Questions = [];
   static Future<List> GetData() async {
@@ -36,8 +34,5 @@ abstract class QuizzBrain {
     return Questions ;
   }
 
-  static Future<List> GetQuestion() async {
-    var x = await GetData();
-    return x;
-  }
+
 }
