@@ -1,18 +1,30 @@
 import 'package:flutter/material.dart';
-import './Screens/Page.dart';
-import './Screens/home.dart';
-import './Screens/profile.dart';
-import './Screens/splash.dart';
-import 'networking/Loading.dart';
+import 'package:flutter/services.dart';
+
+import 'Screens/home.dart';
+import 'Screens/profile.dart';
+import 'Screens/splash.dart';
 
 void main() {
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
- ));
-  runApp(
-    MaterialApp(
+  ));
+  runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute: "/loading",
-    routes:
+    initialRoute: "/splash",
+    routes: {
+      "/home": (context) {
+        return Home();
+      },
+
+      "/profile": (context) {
+        return Profile();
+      },
+      "/splash": (context) {
+        return const Splash();
+      },
+      // "/Qu
+      // izz":Quizz(),
+    },
   ));
 }
