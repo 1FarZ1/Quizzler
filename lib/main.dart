@@ -13,24 +13,6 @@ void main() {
     MaterialApp(
     debugShowCheckedModeBanner: false,
     initialRoute: "/loading",
-    routes: {
-      "/home": (context) {
-        return Home();
-      },
-      
-      "/profile":(context) {
-        return Profile();
-      }
-      ,
-      "/splash":(context) {
-        return Splash();
-      }
-      ,
-         "/loading":(context) {
-        return Loading();
-      }
-      // "/Qu
-      // izz":Quizz(),
-    },
+    routes:
   ));
 }
