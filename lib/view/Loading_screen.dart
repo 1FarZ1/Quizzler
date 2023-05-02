@@ -3,20 +3,20 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-class LoadingScreen extends StatefulWidget {
-  const LoadingScreen({Key? key}) : super(key: key);
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoadingScreen> createState() => _Loading();
+  State<SplashScreen> createState() => _SplashScreen();
 }
 
-class _Loading extends State<LoadingScreen> {
+class _SplashScreen extends State<SplashScreen> {
   @override
   void initState() {
+    super.initState();
     Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacementNamed(context, "/home");
     });
-    super.initState();
   }
 
   @override

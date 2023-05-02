@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'Screens/home.dart';
-import 'Screens/profile.dart';
-import 'Screens/splash.dart';
+import 'view/Loading_screen.dart';
+import 'view/home.dart';
+import 'view/profile.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -21,10 +21,8 @@ void main() {
         return Profile();
       },
       "/splash": (context) {
-        return const Splash();
+        return const SplashScreen();
       },
-      // "/Qu
-      // izz":Quizz(),
     },
   ));
 }
