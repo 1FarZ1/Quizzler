@@ -36,11 +36,8 @@ class _QuizzPageState extends State<QuizzPage> {
         allAnswers.add(data["results"][i]["correct_answer"]);
         allAnswers.shuffle();
 
-        Questions.add(Question(
-            data["results"][i]["question"],
-            allAnswers as String,
-            // .add(data["results"][i]["correct_answer"]),
-            data["results"][i]["correct_answer"]));
+        Questions.add(Question(data["results"][i]["question"],
+            allAnswers as String, data["results"][i]["correct_answer"]));
       }
       saying = false;
       for (int i = 0; i < data["results"].length; i++) {}
@@ -49,15 +46,9 @@ class _QuizzPageState extends State<QuizzPage> {
     }
   }
 
-  int get_cat() {
-    return TRIVIA_DATA[widget.model][0];
-  }
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
+  // int get_cat() {
+  //   return TRIVIA_DATA[widget.model][0];
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,8 +82,8 @@ class _QuizzPageState extends State<QuizzPage> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                     ),
-                    child: Image.asset("assets/couronne.png",
-                        fit: BoxFit.cover),
+                    child:
+                        Image.asset("assets/couronne.png", fit: BoxFit.cover),
                   ),
                   Text("$correct_answr/8",
                       style: const TextStyle(
@@ -124,22 +115,7 @@ class _QuizzPageState extends State<QuizzPage> {
                 shrinkWrap: true,
                 itemCount: 5,
                 itemBuilder: (context, i) {
-                  if (i >= 0 && i < 4) {
-                    try {
-                      return ChooseCard(Questions[index].suggestions[i],
-                          i, selected_index, () {
-                        setState(() {
-                          if (selected_index != i) {
-                            selected_index = i;
-                          } else {
-                            selected_index = 5;
-                          }
-                        });
-                      });
-                    } catch (e) {
-                      return const CircularProgressIndicator();
-                    }
-                  } else if (i == 4) {
+                  if (i == 4) {
                     return Column(
                       children: [
                         const SizedBox(
@@ -154,10 +130,8 @@ class _QuizzPageState extends State<QuizzPage> {
                                   if (selected_index ==
                                       Questions[index]
                                           .suggestions
-                                          .indexOf(
-                                              Questions[index].answr)) {
-                                    print(
-                                        "he is correct $selected_index");
+                                          .indexOf(Questions[index].answr)) {
+                                    print("he is correct $selected_index");
 
                                     perc_value += 0.125;
                                     correct_answr++;
@@ -188,11 +162,9 @@ class _QuizzPageState extends State<QuizzPage> {
                                       Color(0xffEF3CB0),
                                     ],
                                   ),
-                                  borderRadius:
-                                      BorderRadius.circular(15)),
+                                  borderRadius: BorderRadius.circular(15)),
                               child: const Padding(
-                                padding:
-                                    EdgeInsets.fromLTRB(75.0, 17, 75, 17),
+                                padding: EdgeInsets.fromLTRB(75.0, 17, 75, 17),
                                 child: Text(
                                   "Valide",
                                   style: TextStyle(
@@ -204,14 +176,21 @@ class _QuizzPageState extends State<QuizzPage> {
                         ),
                       ],
                     );
-                  } else {
-                    return const Text("no elememt");
                   }
+                  return ChooseCard(
+                      Questions[index].suggestions[i], i, selected_index, () {
+                    setState(() {
+                      if (selected_index != i) {
+                        selected_index = i;
+                      } else {
+                        selected_index = 5;
+                      }
+                    });
+                  });
                 }),
           ]),
         ),
       ),
-
       extendBody: true,
     );
   }

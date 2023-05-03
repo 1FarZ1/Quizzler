@@ -12,7 +12,6 @@ class AppColor{
 }
 class AppConsts{
   AppConsts._();
-  static const baseUrl = "https://opentdb.com/api.php";
 }
 
 
