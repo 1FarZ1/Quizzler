@@ -3,52 +3,30 @@ import 'package:mdi/mdi.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:quizzler/models/quizz.dart';
 
-import '../repository/quizz/quizz_repo.dart';
-
-const Color KPRIMAY = Color(0xff55747E);
-const Color KSECONDARY = Color(0XFFE5FEEC);
-const Color KTHIRD = Color(0xff28E68E);
-const Color KFOUR = Color(0xffF1FFEF);
-const Color KFIVE = Color(0xffDDFEE4);
+import '../core/consts.dart';
 
 class QuizzPage extends StatefulWidget {
-  String model;
-  QuizzPage(this.model, {Key? key}) : super(key: key);
+  const QuizzPage({Key? key}) : super(key: key);
   @override
   State<QuizzPage> createState() => _QuizzPageState();
 }
 
 class _QuizzPageState extends State<QuizzPage> {
   int index = 0;
-  late int selected_card;
   List<Question> Questions = [];
-  List Booleans = [];
   double perc_value = 0;
-  int correct_answr = 0;
-  int selected_index = 5;
-  bool saying = true;
-  int? my_choice;
-  void ManageData(Map data) {
-    if (saying) {
-      for (int i = 0; i < data["results"].length; i++) {
-        List allAnswers = [];
-        allAnswers.addAll(data["results"][i]["incorrect_answers"]);
-        allAnswers.add(data["results"][i]["correct_answer"]);
-        allAnswers.shuffle();
-
-        Questions.add(Question(data["results"][i]["question"],
-            allAnswers as String, data["results"][i]["correct_answer"]));
-      }
-      saying = false;
-      for (int i = 0; i < data["results"].length; i++) {}
-    } else {
-      return;
+  int? correct_answr;
+  int? selected_index;
+  void manageData(Map data) {
+    for (int i = 0; i < data["results"].length; i++) {
+      List allAnswers = [];
+      allAnswers.addAll(data["results"][i]["incorrect_answers"]);
+      allAnswers.add(data["results"][i]["correct_answer"]);
+      allAnswers.shuffle();
+      Questions.add(Question(data["results"][i]["question"],
+          allAnswers as String, data["results"][i]["correct_answer"]));
     }
   }
-
-  // int get_cat() {
-  //   return TRIVIA_DATA[widget.model][0];
-  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +52,7 @@ class _QuizzPageState extends State<QuizzPage> {
                     lineHeight: 10.0,
                     barRadius: const Radius.circular(40),
                     percent: perc_value,
-                    progressColor: KTHIRD,
+                    progressColor: AppColor.KTHIRD,
                   ),
                   Container(
                     width: 23,
@@ -87,7 +65,7 @@ class _QuizzPageState extends State<QuizzPage> {
                   ),
                   Text("$correct_answr/8",
                       style: const TextStyle(
-                          color: KPRIMAY,
+                          color: AppColor.KPRIMAY,
                           fontSize: 20,
                           fontWeight: FontWeight.w800))
                 ],
@@ -125,20 +103,15 @@ class _QuizzPageState extends State<QuizzPage> {
                           onTap: () {
                             if (index <= 7) {
                               setState(() {
-                                // check if answr ir right
                                 if (selected_index != 5) {
                                   if (selected_index ==
                                       Questions[index]
                                           .suggestions
                                           .indexOf(Questions[index].answr)) {
-                                    print("he is correct $selected_index");
-
                                     perc_value += 0.125;
-                                    correct_answr++;
+                                    correct_answr = correct_answr! + 1;
                                   }
                                   if (index == 7) {
-                                    // end of Quizz
-                                    print("im her");
                                     Navigator.pop(context, {
                                       "perc": perc_value,
                                       "correct": correct_answr,
@@ -152,33 +125,13 @@ class _QuizzPageState extends State<QuizzPage> {
                               });
                             }
                           },
-                          child: Container(
-                              decoration: BoxDecoration(
-                                  gradient: const LinearGradient(
-                                    begin: Alignment.centerLeft,
-                                    end: Alignment.centerRight,
-                                    colors: [
-                                      Color(0xff654FE5),
-                                      Color(0xffEF3CB0),
-                                    ],
-                                  ),
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: const Padding(
-                                padding: EdgeInsets.fromLTRB(75.0, 17, 75, 17),
-                                child: Text(
-                                  "Valide",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      color: Color(0xffEDEAF7),
-                                      fontWeight: FontWeight.w900),
-                                ),
-                              )),
+                          child: const SubmitButton(),
                         ),
                       ],
                     );
                   }
                   return ChooseCard(
-                      Questions[index].suggestions[i], i, selected_index, () {
+                      Questions[index].suggestions[i], i, selected_index!, () {
                     setState(() {
                       if (selected_index != i) {
                         selected_index = i;
@@ -196,7 +149,38 @@ class _QuizzPageState extends State<QuizzPage> {
   }
 }
 
-class ChooseCard extends StatefulWidget {
+class SubmitButton extends StatelessWidget {
+  const SubmitButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [
+                Color(0xff654FE5),
+                Color(0xffEF3CB0),
+              ],
+            ),
+            borderRadius: BorderRadius.circular(15)),
+        child: const Padding(
+          padding: EdgeInsets.fromLTRB(75.0, 17, 75, 17),
+          child: Text(
+            "Valide",
+            style: TextStyle(
+                fontSize: 20,
+                color: Color(0xffEDEAF7),
+                fontWeight: FontWeight.w900),
+          ),
+        ));
+  }
+}
+
+class ChooseCard extends StatelessWidget {
   String text;
   int index;
   int selected_index;
@@ -205,15 +189,10 @@ class ChooseCard extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<ChooseCard> createState() => _ChooseCardState();
-}
-
-class _ChooseCardState extends State<ChooseCard> {
-  @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        widget.myfun();
+        myfun();
       },
       child: Padding(
         padding: const EdgeInsets.only(bottom: 10.0),
@@ -221,7 +200,7 @@ class _ChooseCardState extends State<ChooseCard> {
             width: double.infinity,
             height: 70,
             decoration: BoxDecoration(
-                color: widget.selected_index == widget.index
+                color: selected_index == index
                     ? const Color(0xffD742C7)
                     : Colors.white,
                 borderRadius: BorderRadius.circular(15)),
@@ -252,7 +231,7 @@ class _ChooseCardState extends State<ChooseCard> {
                     children: [
                       const SizedBox(height: 9),
                       Text(
-                        widget.text,
+                        text,
                         style: const TextStyle(
                             fontSize: 22,
                             color: Color(0xff2E5961),
