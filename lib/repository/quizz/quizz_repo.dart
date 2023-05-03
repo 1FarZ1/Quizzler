@@ -21,17 +21,3 @@ class QuizRepoImpl implements QuizzRepo {
   }
 }
 
-const Map TRIVIA_DATA = {
-  "Mathematics": [19, 0, 0],
-  "History": [23, 0, 0],
-  "Computers": [18, 0, 0],
-  "VideoGames": [15, 0, 0],
-  "Animes": [31, 0, 0],
-};
-Map TRIVIA_Slider = {
-  "Mathematics": [0, 0],
-  "History": [0, 0],
-  "Computers": [0, 0],
-  "VideoGames": [0, 0],
-  "Animes": [0, 0],
-};

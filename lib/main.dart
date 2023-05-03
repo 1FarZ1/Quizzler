@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'view/Loading_screen.dart';
+import 'view/loading_screen.dart';
 import 'view/home.dart';
 import 'view/profile.dart';
 
@@ -14,11 +14,10 @@ void main() {
     initialRoute: "/splash",
     routes: {
       "/home": (context) {
-        return Home();
+        return const Home();
       },
-
       "/profile": (context) {
-        return Profile();
+        return const Profile();
       },
       "/splash": (context) {
         return const SplashScreen();

@@ -12,7 +12,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   bool checkedValue = false;
   int _currentIndex = 0;
-  bool is_pressed = false;
+  bool isPressed = false;
   final titleController = TextEditingController();
   final ageController = TextEditingController();
   @override
@@ -157,7 +157,7 @@ class _ProfileState extends State<Profile> {
                 ButtonTheme(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xff6A72FF),
+                      backgroundColor: const Color(0xff6A72FF),
                       fixedSize: const Size(350, 55),
                       shape: const StadiumBorder(),
                     ),
@@ -192,7 +192,7 @@ class _ProfileState extends State<Profile> {
               title: Text(
                 "mes enfants",
                 style: TextStyle(
-                    color: is_pressed
+                    color: isPressed
                         ? const Color(0xff4696FF)
                         : const Color(0xff0A3847),
                     fontWeight: FontWeight.w900,
@@ -217,12 +217,11 @@ class _ProfileState extends State<Profile> {
           currentIndex: _currentIndex,
           onTap: (index) {
             setState(() {
-              print(_currentIndex);
               _currentIndex = index;
               if (index == 0) {
-                is_pressed = true;
+                isPressed = true;
               } else {
-                is_pressed = false;
+                isPressed = false;
               }
             });
           },

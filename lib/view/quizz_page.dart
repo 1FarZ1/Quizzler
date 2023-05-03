@@ -13,20 +13,21 @@ class QuizzPage extends StatefulWidget {
 
 class _QuizzPageState extends State<QuizzPage> {
   int index = 0;
-  List<Question> Questions = [];
-  double perc_value = 0;
-  int? correct_answr;
-  int? selected_index;
+  List<Question> questions = [];
+  double percValue = 0;
+  int? correctAnswr;
+  int? selectedIndex;
   void manageData(Map data) {
     for (int i = 0; i < data["results"].length; i++) {
       List allAnswers = [];
       allAnswers.addAll(data["results"][i]["incorrect_answers"]);
       allAnswers.add(data["results"][i]["correct_answer"]);
       allAnswers.shuffle();
-      Questions.add(Question(data["results"][i]["question"],
+      questions.add(Question(data["results"][i]["question"],
           allAnswers as String, data["results"][i]["correct_answer"]));
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,8 +52,8 @@ class _QuizzPageState extends State<QuizzPage> {
                     width: 220.0,
                     lineHeight: 10.0,
                     barRadius: const Radius.circular(40),
-                    percent: perc_value,
-                    progressColor: AppColor.KTHIRD,
+                    percent: percValue,
+                    progressColor: AppColor.thirdColor,
                   ),
                   Container(
                     width: 23,
@@ -63,9 +64,9 @@ class _QuizzPageState extends State<QuizzPage> {
                     child:
                         Image.asset("assets/couronne.png", fit: BoxFit.cover),
                   ),
-                  Text("$correct_answr/8",
+                  Text("$correctAnswr/8",
                       style: const TextStyle(
-                          color: AppColor.KPRIMAY,
+                          color: AppColor.primaryColor,
                           fontSize: 20,
                           fontWeight: FontWeight.w800))
                 ],
@@ -80,7 +81,7 @@ class _QuizzPageState extends State<QuizzPage> {
             ),
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text(Questions[index].questionText,
+                child: Text(questions[index].questionText,
                     style: const TextStyle(
                         color: Color(0xff0B3948),
                         fontSize: 27,
@@ -103,24 +104,24 @@ class _QuizzPageState extends State<QuizzPage> {
                           onTap: () {
                             if (index <= 7) {
                               setState(() {
-                                if (selected_index != 5) {
-                                  if (selected_index ==
-                                      Questions[index]
+                                if (selectedIndex != 5) {
+                                  if (selectedIndex ==
+                                      questions[index]
                                           .suggestions
-                                          .indexOf(Questions[index].answr)) {
-                                    perc_value += 0.125;
-                                    correct_answr = correct_answr! + 1;
+                                          .indexOf(questions[index].answr)) {
+                                    percValue += 0.125;
+                                    correctAnswr = correctAnswr! + 1;
                                   }
                                   if (index == 7) {
                                     Navigator.pop(context, {
-                                      "perc": perc_value,
-                                      "correct": correct_answr,
+                                      "perc": percValue,
+                                      "correct": correctAnswr,
                                     });
                                   } else {
                                     index++;
                                   }
 
-                                  selected_index = 5;
+                                  selectedIndex = 5;
                                 }
                               });
                             }
@@ -131,12 +132,12 @@ class _QuizzPageState extends State<QuizzPage> {
                     );
                   }
                   return ChooseCard(
-                      Questions[index].suggestions[i], i, selected_index!, () {
+                      questions[index].suggestions[i], i, selectedIndex!, () {
                     setState(() {
-                      if (selected_index != i) {
-                        selected_index = i;
+                      if (selectedIndex != i) {
+                        selectedIndex = i;
                       } else {
-                        selected_index = 5;
+                        selectedIndex = 5;
                       }
                     });
                   });
@@ -183,9 +184,9 @@ class SubmitButton extends StatelessWidget {
 class ChooseCard extends StatelessWidget {
   String text;
   int index;
-  int selected_index;
+  int selectedIndex;
   VoidCallback myfun;
-  ChooseCard(this.text, this.index, this.selected_index, this.myfun, {Key? key})
+  ChooseCard(this.text, this.index, this.selectedIndex, this.myfun, {Key? key})
       : super(key: key);
 
   @override
@@ -200,7 +201,7 @@ class ChooseCard extends StatelessWidget {
             width: double.infinity,
             height: 70,
             decoration: BoxDecoration(
-                color: selected_index == index
+                color: selectedIndex == index
                     ? const Color(0xffD742C7)
                     : Colors.white,
                 borderRadius: BorderRadius.circular(15)),
