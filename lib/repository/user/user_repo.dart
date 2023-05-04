@@ -19,7 +19,7 @@ class UserRepoImpl implements UserRepo {
     }
   }
   @override
-  Future<List<Map<String, dynamic>>?> login() async {
+  Future<List<Map<String, dynamic>>?> logIn() async {
     try {
       final response = await apiService.getQuizzByCategorie(category: "23");
       return response.data;
